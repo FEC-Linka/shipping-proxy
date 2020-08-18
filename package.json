@@ -1,0 +1,30 @@
+{
+  "name": "shipping-proxy",
+  "version": "1.0.0",
+  "description": "Proxy server for Etsy project",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FEC-Linka/shipping-proxy.git"
+  },
+  "author": "Tammy Treit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FEC-Linka/shipping-proxy/issues"
+  },
+  "homepage": "https://github.com/FEC-Linka/shipping-proxy#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "node": "^14.8.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "jest": "^26.4.0",
+    "nodemon": "^2.0.4"
+  }
+}
