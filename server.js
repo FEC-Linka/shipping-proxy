@@ -27,7 +27,7 @@ app.get('/shipping-api/:productId', (req, res) => {
   id = parseInt(id, 10);
   axios({
     method: 'get',
-    url: `http://localhost:7100/shipping-api/${id}`
+    url: `http://3.95.162.236/shipping-api/${id}`
   })
   .then((shipping) => {
     res.send(shipping.data)
