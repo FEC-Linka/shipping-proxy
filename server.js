@@ -17,8 +17,6 @@ app.get('/:productId', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
 })
 
-//create variable with id that's available to all routes
-
 //  ***API Referals***
 
 // Shipping API
@@ -37,6 +35,20 @@ app.get('/shipping-api/:productId', (req, res) => {
   });
 })
 
+//  Shipping Cost Data
+app.get('/productInfo-api', (req, res) => {
+  axios({
+    method: 'get',
+    url: `http://3.95.162.236/productInfo-api`
+  })
+  .then((products) => {
+    //res.send(products)
+  })
+  .catch((err) => {
+    console.error(err)
+  });
+})
+
 // Reviews APIs
 
 // reviews
@@ -48,8 +60,7 @@ app.get('/reviews/:productId', (req, res) => {
     url: `http://etsy-reviews.rvrita.com/reviews/${id}`
   })
   .then((reviews) => {
-    console.log('REVDATA', reviews.data)
-    //res.send(reviews.data)
+    res.send(reviews.data)
   })
   .catch((err) => {
     console.error(err)
@@ -105,40 +116,51 @@ app.get('/reviews-pictures/:productId', (req, res) => {
 })
 
 //Item info ***TODO*** refactor when Val finishes
-app.get('/info', (req, res) => {
-  // let id = req.params.productId;  //may have to change productId
-  // id = parseInt(id, 10);
+app.get('/itemDetails/:productId', (req, res) => {
+  let id = req.params.productId;
+  id = parseInt(id, 10);
   axios({
     method: 'get',
-    url: `http://localhost:5000/info`  //TODO change to include id
+    url: `http://3.133.108.106/itemDetails/${id}`
   })
   .then((info) => {
-    console.log(info)
-    res.send(info)
-    //res.send(info.data)
+    res.send(info.data)
   })
   .catch((err) => {
     console.error(err)
   });
 })
 
-//Pictures ***TODO*** refactor when Zach finishes
-app.get('/pictures', (req, res) => {
-  // let id = req.params.productId;  //may have to change productId
-  // id = parseInt(id, 10);
+app.get('/info/:productId', (req, res) => {
+  let id = req.params.productId;
+  id = parseInt(id, 10);
   axios({
     method: 'get',
-    url: `http://localhost:3000/pictures/?itemId=1`  //TODO change to include dynamic id
+    url: `http://3.133.108.106/info/${id}`
   })
   .then((info) => {
-    console.log(info)
-    res.send(info)
-    //res.send(info.data)
+    res.send(info.data)
   })
   .catch((err) => {
     console.error(err)
   });
 })
+
+
+
+
+// app.get('/pictures', (req, res) => {
+//   axios({
+//     method: 'get',
+//     url: `http://13.56.229.226/` + req.url
+//   })
+//   .then((info) => {
+//     res.send(info.data)
+//   })
+//   .catch((err) => {
+//     console.error(err)
+//   });
+// })
 
 app.listen(port, () => {
   console.log(`Etsy Proxy listening on port ${port}`);
