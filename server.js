@@ -9,14 +9,6 @@ const port = process.env.PORT || 7199;
 
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
-})
-
-app.get('/:productId', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
-})
-
 //  ***API Referals***
 
 // Shipping API
@@ -115,7 +107,6 @@ app.get('/reviews-pictures/:productId', (req, res) => {
   });
 })
 
-//Item info ***TODO*** refactor when Val finishes
 app.get('/itemDetails/:productId', (req, res) => {
   let id = req.params.productId;
   id = parseInt(id, 10);
@@ -146,21 +137,27 @@ app.get('/info/:productId', (req, res) => {
   });
 })
 
+app.get('/pictures', (req, res) => {
+  console.log('REQ.URL', req.url)
+  axios({
+    method: 'get',
+    url: `http://13.56.229.226` + req.url
+  })
+  .then((info) => {
+    res.send(info.data)
+  })
+  .catch((err) => {
+    console.error(err)
+  });
+})
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+})
 
-
-// app.get('/pictures', (req, res) => {
-//   axios({
-//     method: 'get',
-//     url: `http://13.56.229.226/` + req.url
-//   })
-//   .then((info) => {
-//     res.send(info.data)
-//   })
-//   .catch((err) => {
-//     console.error(err)
-//   });
-// })
+app.get('/:productId', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+})
 
 app.listen(port, () => {
   console.log(`Etsy Proxy listening on port ${port}`);
