@@ -9,6 +9,9 @@ const port = process.env.PORT || 7199;
 
 app.use(cors());
 
+//  Static Files
+app.use(express.static('public'));
+
 //  ***API Referals***
 
 // Shipping API
@@ -151,9 +154,9 @@ app.get('/pictures', (req, res) => {
   });
 })
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
-})
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, './public/index.html'));
+// })
 
 app.get('/:productId', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'));
